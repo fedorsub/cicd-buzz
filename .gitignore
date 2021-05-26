@@ -1,0 +1,6 @@
+/.pytest_cache
+/.vscode
+/.buzz/__pycache__ 
+buzz/__pycache__/__init__.cpython-38.pyc
+buzz/__pycache__/generator.cpython-38.pyc
+tests/__pycache__/test_generator.cpython-38-pytest-6.2.4.pyc
