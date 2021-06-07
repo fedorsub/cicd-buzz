@@ -1,0 +1,78 @@
+pipelines:
+  branches:
+    release-10.0:
+      - parallel:
+        - step:
+            name: Updating MizaemRU
+            deployment: MizaemRU
+            script:
+              - cat ./update.sh | ssh -T main@"$SERVER"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart FlaskApp"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart TaskDispather"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart EmailNotificationSender"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart PushNotificationSender"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart SmsNotificationSender"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart CallNotificationSender"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart SmsStatusReceiver"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart TriggersQueueWorker"
+        - step:
+            name: Updating Zaimko
+            deployment: Zaimko
+            script:
+              - cat ./update.sh | ssh -T main@"$SERVER"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart all"
+        - step:
+            name: Updating MXcredito
+            deployment: MXcredito
+            script:
+              - cat ./update.sh | ssh -T main@"$SERVER"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart all"
+        - step:
+            name: Updating VNcredito
+            deployment: MFO-Vietnam
+            script:
+              - cat ./update.sh | ssh -T main@"$SERVER" -p 65075
+              - ssh -T main@"$SERVER" -p 65075 "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart all"
+        - step:
+            name: Updating MizaemUA
+            deployment: MizaemUA
+            script:
+              - cat ./update.sh | ssh -T main@"$SERVER"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart all"
+        - step:
+            name: Updating MizaemKZ
+            deployment: MizaemKZ
+            script:
+              - cat ./update.sh | ssh -T main@"$SERVER" -p 65075
+              - ssh -T main@"$SERVER" -p 65075 "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart all"
+        - step:
+            name: Updating ZaimkoUlia
+            deployment: ZaimkoUlia
+            script:
+              - cat ./update.sh | ssh -T main@"$SERVER"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart all"
+        - step:
+            name: Updating ZaimkoUlia-kz
+            deployment: ZaimkoUlia-kz
+            script:
+              - cat ./update.sh | ssh -T main@"$SERVER"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart all"
+        - step:
+            name: Updating ZaimkoUlia-mx
+            deployment: ZaimkoUlia-mx
+            script:
+              - cat ./update.sh | ssh -T main@"$SERVER"
+              - ssh -T main@"$SERVER" "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart all"
+    dev:
+      - step:
+          name: Updating BetaTest
+          deployment: BetaTest
+          script:
+            - cat ./update_dev.sh | ssh -T main@"$SERVER" -p 65075
+            - ssh -T main@"$SERVER" -p 65075 "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart FlaskApp"
+            - ssh -T main@"$SERVER" -p 65075 "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart TaskDispather"
+            - ssh -T main@"$SERVER" -p 65075 "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart EmailNotificationSender"
+            - ssh -T main@"$SERVER" -p 65075 "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart PushNotificationSender"
+            - ssh -T main@"$SERVER" -p 65075 "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart SmsNotificationSender"
+            - ssh -T main@"$SERVER" -p 65075 "echo "$MAIN_PASSWORD" | sudo -S supervisorctl restart SmsStatusReceiver"
+
