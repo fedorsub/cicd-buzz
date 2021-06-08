@@ -1,7 +1,7 @@
 import random
  
 buzz = ('continuous22 testing', 'continuous333 integration', 'continuou deployment', 'continuous2345 improvement', 'devops')
-adjectives = ('complete', 'modern', 'self-service', 'integrated', 'end-to-end')
+adjectives = ('complete2', 'modern', 'self-service', 'integrated', 'end-to-end')
 adverbs = ('remarkably', 'enormously', 'substantially', 'significantly','seriously')
 verbs = ('accelerates', 'improves', 'enhances', 'revamps', 'boosts')
  
