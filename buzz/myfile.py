@@ -1,8 +1,5 @@
-# импорт pandas
-import pandas as pd
-# Считайте DataFrame, используя данные функции
-df = pd.DataFrame(data.data, columns=data.feature_names)
-# Добавьте столбец "target" и заполните его данными.
-df['target'] = data.target
-# Посмотрим первые пять строк
-df.head()
+x = int(input('Введи, сколько у вас литров пива: '))
+if not (x < 5):
+    print('Все нормально, можно начинать взлом')
+else:
+    print('Пива недостаточно.')
